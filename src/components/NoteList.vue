@@ -1,8 +1,8 @@
 <template>
-    <draggable v-model="localNotes" :animation="300" tag="ul" @end="onEndDrag" class="w-10/12 mx-auto mt-20 grid gap-8 lg:grid-cols-4">
-        <template #item="{ element: note }">
-            <li :key="note.id" class="rounded-lg border-2 p-7 hover:shadow-2xl">
-                <NoteCard :note="note" />
+    <draggable v-model="localNotes" :animation="300" :item-key="index" tag="ul" @end="onEndDrag" class="w-10/12 mx-auto mt-20 grid gap-8 lg:grid-cols-4">
+        <template #item="{ element: note, index }">
+            <li :key="note.id" class="rounded-lg border-2 rounded-lg hover:shadow-2xl">
+                <NoteCard :note="note" :index="index" :removeNote="removeNote"/>
             </li>
         </template>
     </draggable>
@@ -16,8 +16,9 @@ import draggable from 'vuedraggable';
 
 const notesStore = useNotesStore();
 const localNotes = ref([...notesStore.notes]);
+const { index } = defineProps(['note', 'index']);
 
-// Aktualizujte localNotes pri zmene v notesStore
+// Aktualizuje localNotes pri zmene v notesStore
 watch(() => notesStore.notes, (newNotes) => {
     localNotes.value = [...newNotes];
 }, { deep: true });
@@ -33,7 +34,7 @@ onMounted(() => {
     if (savedNotes) {
         localNotes.value = JSON.parse(savedNotes);
     } else {
-        saveNotesToLocalStorage(); // Uložte predvolené hodnoty, ak nie sú žiadne uložené poznámky
+        saveNotesToLocalStorage();
     }
 });
 
@@ -45,5 +46,9 @@ watch(localNotes, () => {
 const onEndDrag = () => {
     notesStore.setNotes(localNotes.value);
     saveNotesToLocalStorage();
+};
+//Vymazanie poznamky
+const removeNote = (index: number) => {
+    notesStore.removeNote(index);
 };
 </script>

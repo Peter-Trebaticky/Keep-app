@@ -1,22 +1,35 @@
 import { defineStore } from 'pinia';
 
+interface Note {
+  title: string;
+  content: string;
+  color: string;
+}
+
 export const useNotesStore = defineStore('notes', {
-  // Inicializace stavu store
   state: () => ({
-    notes: JSON.parse(localStorage.getItem('notes') || '[]') as string[],
+    notes: JSON.parse(localStorage.getItem('notes') || '[]') as Note[],
   }),
   actions: {
-    addNote(note: string) {
-      // Přidání nové poznámky do seznamu
-      this.notes.push(note);
-      // Uložení aktualizovaného seznamu poznámek do Local Storage
+    addNote(newNote: Note) {
+      // Pridanie novej poznámky na začiatok zoznamu
+      this.notes.unshift(newNote);
+      // Uloženie aktualizovaného zoznamu poznámok do local storage
+      this.saveNotes();
+    },
+    setNotes(newNotes: Note[]) {
+      // Nastavenie nového stavu poznámok
+      this.notes = newNotes;
+      // Uloženie nového stavu poznámok do local storage
+      this.saveNotes();
+    },
+    saveNotes() {
+      // Pomocná funkcia pre ukladanie poznámok do local storage
       localStorage.setItem('notes', JSON.stringify(this.notes));
     },
-    setNotes(newNotes: string[]) {
-      // Nastavení nového stavu poznámek
-      this.notes = newNotes;
-      // Uložení nového stavu poznámek do Local Storage
-      localStorage.setItem('notes', JSON.stringify(newNotes));
-    }
+    removeNote(index: number) {
+    this.notes.splice(index, 1);
+    this.saveNotes();
+    },
   }
 });
