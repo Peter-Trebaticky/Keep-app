@@ -1,10 +1,10 @@
 <script setup lang="ts">
-  import NavBar from '@/components/NavBars/NavBar.vue'
+  import TakeANoteBar from '@/components/NavBars/TakeANoteBar.vue'
   import NoteList from '@/components/NoteList.vue'
 </script>
 
 <template>
-  <NavBar/>
+  <TakeANoteBar/>
   <NoteList/>
 </template>
 

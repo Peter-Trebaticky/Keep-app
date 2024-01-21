@@ -1,5 +1,4 @@
 <script setup lang="ts">
-    import SearchBar from './SearchBar.vue'
     import TakeANoteBar from './TakeANoteBar.vue'
 </script>
 
