@@ -4,6 +4,7 @@ interface Note {
   title: string;
   content: string;
   color: string;
+  timeCreated: string;
 }
 
 export const useNotesStore = defineStore('notes', {
@@ -12,6 +13,15 @@ export const useNotesStore = defineStore('notes', {
   }),
   actions: {
     addNote(newNote: Note) {
+      const now = new Date();
+      newNote.timeCreated = now.toLocaleString("sk-SK", {
+      day: '2-digit',// Formátovanie dátumu a času 
+      month: 'numeric',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: false
+      }); 
       // Pridanie novej poznámky na začiatok zoznamu
       this.notes.unshift(newNote);
       // Uloženie aktualizovaného zoznamu poznámok do local storage

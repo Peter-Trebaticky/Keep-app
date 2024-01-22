@@ -21,7 +21,7 @@ watch(() => notesStore.notes, (newNotes) => {
     localNotes.value = [...newNotes];
 }, { deep: true });
 
-// Funkcia na uloženie poznámok do Local Storage
+// Funkcia na uloženie poznámok do local storage
 const saveNotesToLocalStorage = () => {
     localStorage.setItem('notes', JSON.stringify(localNotes.value));
 };
