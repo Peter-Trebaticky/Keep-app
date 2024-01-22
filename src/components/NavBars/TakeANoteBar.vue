@@ -4,7 +4,7 @@
       <p class="text-gray-500">Take a note...</p>
     </div>
     <div v-else class="w-full">
-      <input v-model="title" class="text-gray-500 w-full mb-2 focus:outline-none" placeholder="Title" autofocus />
+      <input v-model="title" class="text-gray-500 w-full mb-2 focus:outline-none" placeholder="Title" autofocus required/>
       <textarea v-model="content" class="w-full focus:outline-none" placeholder="Take a note"></textarea>
 
       <div class="flex flex-wrap mt-2">
@@ -24,43 +24,45 @@
   </form>
 </template>
 
-<script lang="ts">
-import { ref, Ref } from 'vue';
+<script lang="ts" setup>
+// Importuje potrebné funkcie z Vue a vlastného úložiska
+import { ref } from 'vue';
 import { useNotesStore } from '@/stores/ProductStore';
 
-export default {
-  setup() {
-    const notesStore = useNotesStore();
-    const editing: Ref<boolean> = ref(false);
-    const title: Ref<string> = ref('');
-    const content: Ref<string> = ref('');
-    const selectedColor: Ref<string> = ref('#FFFFFF'); // Vychodzia farba
+// Inicializuje úložisko poznámok
+const notesStore = useNotesStore();
 
-    // Farby
-    const colorOptions: string[] = ['#FFFFFF', '#FFC0CB', '#FFD700', '#90EE90', '#ADD8E6', '#FFA07A', '#20B2AA', '#87CEFA'];
+// Reactívne premenné pre stav úpravy, titulok, obsah a vybranú farbu
+const editing = ref(false);
+const title = ref('');
+const content = ref('');
+const selectedColor = ref('#FFFFFF');
 
-    const startEditing = () => {
-      editing.value = true;
-    };
+// Farby
+const colorOptions = ['#FFFFFF', '#FFC0CB', '#FFD700', '#90EE90', '#ADD8E6', '#FFA07A', '#20B2AA', '#87CEFA'];
 
-    const saveNote = () => {
-      const newNote = {
-        title: title.value,
-        content: content.value,
-        color: selectedColor.value
-      };
-      notesStore.addNote(newNote);
-      cancelEditing();
-    };
+// Funkcia na začatie úprav poznámky
+const startEditing = () => {
+  editing.value = true;
+};
 
-    const cancelEditing = () => {
-      editing.value = false;
-      title.value = '';
-      content.value = '';
-      selectedColor.value = '#FFFFFF';
-    };
+// Funkcia na uloženie novej poznámky
+const saveNote = () => {
+  const newNote = {
+    title: title.value,
+    content: content.value,
+    color: selectedColor.value,
+    timeCreated: ''
+  };
+  notesStore.addNote(newNote);
+  cancelEditing();
+};
 
-    return { editing, title, content, selectedColor, colorOptions, startEditing, saveNote, cancelEditing };
-  },
+// Funkcia na zrušenie úprav a resetovanie hodnôt
+const cancelEditing = () => {
+  editing.value = false;
+  title.value = '';
+  content.value = '';
+  selectedColor.value = '#FFFFFF';
 };
 </script>

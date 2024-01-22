@@ -12,32 +12,32 @@
 </template>
 
 <script setup lang="ts">
+// Importuje potrebné funkcie z Vue a typ Poznámky
 import { defineProps, computed } from 'vue';
+import { Note } from '@/stores/ProductStore';
 
-// Definicia rozhrania pre note
-interface Note {
-    title: string;
-    content: string;
-    color: string;
-    timeCreated: string;
-}
-
+// Definuje vstupné parametre komponentu
 const props = defineProps({
     note: {
         type: Object as () => Note,
         required: true
     },
     index: Number,
-    removeNote: Function 
+    removeNote: Function
 });
+
+// Funkcia na konverziu URL v texte na klikateľné odkazy
 const linkify = (text: string) => {
     const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/ig;
     return text.replace(urlRegex, function (url) {
         return `<a href="${url}" target="_blank" class="hover:underline">${url}</a>`;
     });
 };
+
+// Vypočítaná hodnota, ktorá používa funkciu linkify na obsah poznámky
 const linkifiedContent = computed(() => linkify(props.note.content));
 
+// Funkcia na odstránenie poznámky
 const onRemove = () => {
     if (props.removeNote) {
         props.removeNote(props.index);

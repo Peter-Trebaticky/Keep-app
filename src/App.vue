@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import TakeANoteBar from '@/components/NavBars/TakeANoteBar.vue'
-  import NoteList from '@/components/NoteList.vue'
+  import NoteList from '@/components/Notes/NoteList.vue'
 </script>
 
 <template>

@@ -40,7 +40,7 @@ onMounted(() => {
 watch(localNotes, () => {
     saveNotesToLocalStorage();
 }, { deep: true });
-
+//Ulozenie poznamky na miesto po pusteni
 const onEndDrag = () => {
     notesStore.setNotes(localNotes.value);
     saveNotesToLocalStorage();

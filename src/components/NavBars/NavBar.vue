@@ -4,7 +4,6 @@
 
 <template>
     <div class="relative flex mx-auto w-10/12 gap-x-8 mt-10">
-        <SearchBar/>
         <TakeANoteBar/>
     </div>
 </template>
