@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia';
+import initialNotes from '@/assets/initialNotes.json';
+
 
 // Definícia rozhrania pre objekt Note
 export interface Note {
@@ -11,10 +13,13 @@ export interface Note {
 // Definovanie úložiska pre prácu s notes
 export const useNotesStore = defineStore('notes', {
   // Počiatočný stav úložiska
-  state: () => ({
-    // Načítanie poznámok z local storage alebo vytvorenie prázdneho zoznamu
-    notes: JSON.parse(localStorage.getItem('notes') || '[]') as Note[],
-  }),
+  state: () => {
+    // Načítanie poznámok z local storage alebo z jsonu
+    const notes: Note[] = JSON.parse(localStorage.getItem('notes') || JSON.stringify(initialNotes));
+    return {
+      notes,
+    };
+  },
   actions: {
     // Pridanie novej poznámky
     addNote(newNote: Note) {
