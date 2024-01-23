@@ -12,11 +12,10 @@
 </template>
 
 <script setup lang="ts">
-// Importuje potrebné funkcie z Vue a typ Poznámky
 import { defineProps, computed } from 'vue';
 import { Note } from '@/stores/ProductStore';
 
-// Definuje vstupné parametre komponentu
+// Definovanie vstupnych parametrov komponentu
 const props = defineProps({
     note: {
         type: Object as () => Note,

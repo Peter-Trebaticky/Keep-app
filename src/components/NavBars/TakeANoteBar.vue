@@ -25,14 +25,13 @@
 </template>
 
 <script lang="ts" setup>
-// Importuje potrebné funkcie z Vue a vlastného úložiska
 import { ref } from 'vue';
 import { useNotesStore } from '@/stores/ProductStore';
 
 // Inicializuje úložisko poznámok
 const notesStore = useNotesStore();
 
-// Reactívne premenné pre stav úpravy, titulok, obsah a vybranú farbu
+// Reaktívne premenné pre stav úpravy, titulok, obsah a vybranú farbu
 const editing = ref(false);
 const title = ref('');
 const content = ref('');

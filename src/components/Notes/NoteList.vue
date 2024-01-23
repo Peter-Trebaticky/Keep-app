@@ -1,5 +1,5 @@
 <template>
-    <draggable v-model="localNotes" :animation="300" :item-key="index" tag="ul" @end="onEndDrag"  class="w-11/12 mx-auto mt-20 gap-8 columns-1 md:columns-3 lg:columns-4 2xl:w-6/12">
+    <draggable v-model="localNotes" :animation="300" :item-key="index" tag="ul" @end="onEndDrag"  class="w-11/12 mx-auto mt-20 gap-8 columns-1 md:columns-3 lg:columns-4 2xl:w-7/12">
         <template #item="{ element: note, index }">
             <NoteCard :key="note.id" :note="note" :index="index" :removeNote="removeNote"/>
         </template>
@@ -36,7 +36,7 @@ onMounted(() => {
     }
 });
 
-// Sledovanie zmien v lokalnom poli poznámok a ich uloženie
+// Sledovanie zmien v poli poznamok a ich uloženie
 watch(localNotes, () => {
     saveNotesToLocalStorage();
 }, { deep: true });
