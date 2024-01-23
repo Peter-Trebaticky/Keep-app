@@ -1,7 +1,7 @@
 <template>
     <li :style="{ backgroundColor: props.note.color }" class="break-inside-avoid h-min border-2 mb-8 hover:shadow-2xl rounded-lg p-2 flex flex-col overflow-x-auto">
         <h1 class="pb-4 font-bold text-xl font-mono">{{ props.note.title }}</h1>
-        <p v-html="linkifiedContent" class="font-serif"></p>
+        <p v-html="linkifiedContent" class="font-serif text-sm"></p>
         <div class="flex justify-between items-center pt-3 mt-auto">
             <p class="text-gray-500">{{ props.note.timeCreated }}</p>
             <button @click="onRemove" class="ml-auto mt-auto hover:bg-gray-200 rounded-full">
