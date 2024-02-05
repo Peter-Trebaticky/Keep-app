@@ -1,4 +1,6 @@
-https://trebaticky.000webhostapp.com/
+Responsive notes app inspired by Google keep built in Vue 3, TypeScript, Vite, Pinia and styled with Tailwind CSS.
+
+(https://peter-trebaticky.github.io/Note-app/)
 
 # Vue 3 + TypeScript + Vite
 
