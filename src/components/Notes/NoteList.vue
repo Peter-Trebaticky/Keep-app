@@ -16,17 +16,17 @@ const notesStore = useNotesStore();
 const localNotes = ref([...notesStore.notes]);
 const { index } = defineProps(['note', 'index']);
 
-// Aktualizuje localNotes pri zmene v notesStore
+
 watch(() => notesStore.notes, (newNotes) => {
     localNotes.value = [...newNotes];
 }, { deep: true });
 
-// Funkcia na uloženie poznámok do local storage
+
 const saveNotesToLocalStorage = () => {
     localStorage.setItem('notes', JSON.stringify(localNotes.value));
 };
 
-// Načítanie poznámok z Local Storage pri načítaní komponentu
+
 onMounted(() => {
     const savedNotes = localStorage.getItem('notes');
     if (savedNotes) {
@@ -36,16 +36,16 @@ onMounted(() => {
     }
 });
 
-// Sledovanie zmien v poli poznamok a ich uloženie
+
 watch(localNotes, () => {
     saveNotesToLocalStorage();
 }, { deep: true });
-//Ulozenie poznamky na miesto po pusteni
+
 const onEndDrag = () => {
     notesStore.setNotes(localNotes.value);
     saveNotesToLocalStorage();
 };
-//Vymazanie poznamky
+
 const removeNote = (index: number) => {
     notesStore.removeNote(index);
 };

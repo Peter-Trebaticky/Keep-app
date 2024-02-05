@@ -28,24 +28,24 @@
 import { ref } from 'vue';
 import { useNotesStore } from '@/stores/ProductStore';
 
-// Inicializuje úložisko poznámok
+
 const notesStore = useNotesStore();
 
-// Reaktívne premenné pre stav úpravy, titulok, obsah a vybranú farbu
+
 const editing = ref(false);
 const title = ref('');
 const content = ref('');
 const selectedColor = ref('#FFFFFF');
 
-// Farby
+
 const colorOptions = ['#FFFFFF', '#FFC0CB', '#FFD700', '#90EE90', '#ADD8E6', '#FFA07A', '#20B2AA', '#87CEFA'];
 
-// Funkcia na začatie úprav poznámky
+
 const startEditing = () => {
   editing.value = true;
 };
 
-// Funkcia na uloženie novej poznámky
+
 const saveNote = () => {
   const newNote = {
     title: title.value,
@@ -57,7 +57,7 @@ const saveNote = () => {
   cancelEditing();
 };
 
-// Funkcia na zrušenie úprav a resetovanie hodnôt
+
 const cancelEditing = () => {
   editing.value = false;
   title.value = '';
